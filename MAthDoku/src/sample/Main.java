@@ -181,7 +181,15 @@ public class Main extends Application {
             myBoard.addLine(line);
         }
         myBoard.allLinesIn();
+        if(myBoard.getIfCorrect()==false){
+            errorMessagesLine.setText("Provided board is invalid");
+            return;
+        }
         Solver boardSolver = new Solver(myBoard);
+        if(boardSolver.getNoOfAnswers()==0){
+            errorMessagesLine.setText("Provided board has no solutions");
+            return;
+        }
         myBoard.setCorrectValues(boardSolver.getSolution());
         gameScene = new Scene(myBoard, myBoard.getSqrtSize()*50+100, myBoard.getSqrtSize()*50+100);
         addHandler();

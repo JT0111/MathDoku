@@ -67,17 +67,22 @@ public class GameBoard extends Pane {
         setGrid();
         setButtonsGrid();
         addHandler();
+        if(cellsList.size()<4 || cellsList.size()>66 || !correctInput){
+            correctInput = false;
+        }
 
-        board.getChildren().add(grid);
-        grid.setAlignment(Pos.TOP_LEFT);
-        buttonsGrid.setAlignment(Pos.TOP_RIGHT);
-        board.getChildren().add(buttonsGrid);
-        fullBoard.getChildren().addAll(board, buttonGrid);
-        board.setAlignment(Pos.TOP_CENTER);
-        buttonGrid.setAlignment(Pos.BOTTOM_CENTER);
+        else{
+            board.getChildren().add(grid);
+            grid.setAlignment(Pos.TOP_LEFT);
+            buttonsGrid.setAlignment(Pos.TOP_RIGHT);
+            board.getChildren().add(buttonsGrid);
+            fullBoard.getChildren().addAll(board, buttonGrid);
+            board.setAlignment(Pos.TOP_CENTER);
+            buttonGrid.setAlignment(Pos.BOTTOM_CENTER);
 
-        this.getChildren().add(fullBoard);
-        cellsList.get(1).activate();
+            this.getChildren().add(fullBoard);
+            cellsList.get(1).activate();
+        }
     }
 
     /**
@@ -119,7 +124,7 @@ public class GameBoard extends Pane {
 
     /**
      * Created just for board defined by a file
-     * it's technicaly a creator but not quite
+     * it's technically a creator but not quite
      */
     public void allLinesIn(){
         for (int i = 1; i < 10; i++) {
@@ -128,7 +133,10 @@ public class GameBoard extends Pane {
                 break;
             }
         }
-
+        if(cellsList.size()<4 || cellsList.size()>66 || !correctInput){
+            correctInput = false;
+            return;
+        }
         setGrid();
         setButtonsGrid();
         addHandler();
@@ -318,9 +326,11 @@ public class GameBoard extends Pane {
      * checks if the game is solved
      */
     public void mistakesCheck(){
-        checkRow();
-        checkColumn();
-        checkSphere();
+        if(showMistakes){
+            checkRow();
+            checkColumn();
+            checkSphere();
+        }
         checkIfSolved();
     }
 
