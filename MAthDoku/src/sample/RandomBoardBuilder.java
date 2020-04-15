@@ -8,6 +8,7 @@ public class RandomBoardBuilder {
     int[] board;
     int[] array = new int[1];
     boolean[] isUsed;
+    boolean correctBoard = false;
     private ArrayList<int[]> cagesList = new ArrayList<int[]>(100);
 
     /**
@@ -18,11 +19,10 @@ public class RandomBoardBuilder {
         this.size=size;
         setArray();
         Solver mySolver;
-        setRandomCombination();
+        while (correctBoard == false)
+            setRandomCombination();
         setCages();
-        //mySolver = new Solver(spheresList, size*size, size);
-
-
+        //mySolver = new Solver(spheresList, size*size, size); //not sure how to use it and make sure it has one solution
     }
 
     public  ArrayList<int[]> getCagesList(){
@@ -145,9 +145,12 @@ public class RandomBoardBuilder {
                 }
             }
         }
+        correctBoard = true;
         for(int i=0; i<size; i++){
             for(int j=1; j<=size; j++){
                 System.out.print(board[i*size+j]+ " ");
+                if(board[i*size+j] == 0)
+                    correctBoard=false;
             }
             System.out.println("");
         }

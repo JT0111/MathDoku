@@ -477,7 +477,7 @@ public class GameBoard extends Pane {
     }
 
     /**
-     * checks if the input doesn't validate sphres' rules
+     * checks if the input doesn't validate spheres' rules
      */
     public void checkSphere() {
         switch (cagesList.get(lastClicked)[1]) {
