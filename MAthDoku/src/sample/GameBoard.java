@@ -655,7 +655,7 @@ public class GameBoard extends Pane {
         }
         while (valuesList[randomPosition] == correctValuesList[randomPosition]) {
             randomPosition++;
-            if (randomPosition >= size)
+            if (randomPosition > size)
                 randomPosition = 1;
         }
         for (int i = 1; i <= size; i++)
@@ -784,6 +784,10 @@ public class GameBoard extends Pane {
 
             //defines sign as an easy to use later integer
             sign = newLine.charAt(i);
+            if(newLine.charAt(i) != '÷' && newLine.charAt(i) != '-' && newLine.charAt(i) != '+' && newLine.charAt(i) != 'x'){
+                correctInput=false;
+                return;
+            }
 
             //getting a list of all cells in a sphere and putting it in a "current" array
             for (i = i + 2; i < newLine.length(); i++) {
@@ -841,6 +845,10 @@ public class GameBoard extends Pane {
 
         //defines sign as an easy to use later integer
         sign = newLine.charAt(i);
+        if(newLine.charAt(i) != '÷' && newLine.charAt(i) != '-' && newLine.charAt(i) != '+' && newLine.charAt(i) != 'x'){
+            correctInput=false;
+            return;
+        }
 
         //getting a list of all cells in a sphere and putting it in a "current" array
         for (i = i + 2; i < newLine.length(); i++) {
