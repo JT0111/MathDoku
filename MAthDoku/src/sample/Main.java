@@ -133,19 +133,19 @@ public class Main extends Application {
         addHandler();
         primaryStage.setScene(gameScene);
         primaryStage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            if(primaryStage.getWidth()>primaryStage.getHeight()){
+            if(primaryStage.getWidth()>primaryStage.getHeight()-100){
                 myBoard.setCellsSize(primaryStage.getHeight()-150);
             }
             else
-                myBoard.setCellsSize(primaryStage.getWidth()-100);
+                myBoard.setCellsSize(primaryStage.getWidth()-50);
         });
 
         primaryStage.heightProperty().addListener((obs, oldVal, newVal) -> {
-            if(primaryStage.getWidth()+50>primaryStage.getHeight()){
+            if(primaryStage.getWidth()+100>primaryStage.getHeight()){
                 myBoard.setCellsSize(primaryStage.getHeight()-150);
             }
             else
-                myBoard.setCellsSize(primaryStage.getWidth()-100);
+                myBoard.setCellsSize(primaryStage.getWidth()-50);
         });
     }
 
@@ -166,19 +166,19 @@ public class Main extends Application {
         addHandler();
         primaryStage.setScene(gameScene);
         primaryStage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            if(primaryStage.getWidth()+50>primaryStage.getHeight()){
+            if(primaryStage.getWidth()>primaryStage.getHeight()-100){
                 myBoard.setCellsSize(primaryStage.getHeight()-150);
             }
             else
-                myBoard.setCellsSize(primaryStage.getWidth()-100);
+                myBoard.setCellsSize(primaryStage.getWidth()-50);
         });
 
         primaryStage.heightProperty().addListener((obs, oldVal, newVal) -> {
-            if(primaryStage.getWidth()+50>primaryStage.getHeight()){
+            if(primaryStage.getWidth()+100>primaryStage.getHeight()){
                 myBoard.setCellsSize(primaryStage.getHeight()-150);
             }
             else
-                myBoard.setCellsSize(primaryStage.getWidth()-100);
+                myBoard.setCellsSize(primaryStage.getWidth()-50);
         });
     }
 
@@ -202,19 +202,19 @@ public class Main extends Application {
         addHandler();
         primaryStage.setScene(gameScene);
         primaryStage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            if(primaryStage.getWidth()+50>primaryStage.getHeight()){
+            if(primaryStage.getWidth()>primaryStage.getHeight()-100){
                 myBoard.setCellsSize(primaryStage.getHeight()-150);
             }
             else
-                myBoard.setCellsSize(primaryStage.getWidth()-100);
+                myBoard.setCellsSize(primaryStage.getWidth()-50);
         });
 
         primaryStage.heightProperty().addListener((obs, oldVal, newVal) -> {
-            if(primaryStage.getWidth()+50>primaryStage.getHeight()){
+            if(primaryStage.getWidth()+100>primaryStage.getHeight()){
                 myBoard.setCellsSize(primaryStage.getHeight()-150);
             }
             else
-                myBoard.setCellsSize(primaryStage.getWidth()-100);
+                myBoard.setCellsSize(primaryStage.getWidth()-50);
         });
     }
 

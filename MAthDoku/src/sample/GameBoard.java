@@ -354,6 +354,10 @@ public class GameBoard extends Pane {
         }
     }
 
+    /**
+     * Changes the size of all cells so the game can be resizable
+     * @param newSize
+     */
     public void setCellsSize(double newSize){
         for(int i=1; i<=size; i++){
             cellsList.get(i).setSize(newSize/sqrtSize);
