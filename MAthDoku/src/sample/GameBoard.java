@@ -208,11 +208,13 @@ public class GameBoard extends Pane {
                 if (cellsList.get(lastClicked).getLabel() != "") {
                     undo.setDisable(false);
                     redo.setDisable(true);
+                    int[] lastStateList = new int[size+2];
+                    for (int i = 1; i <= size; i++) {
+                        lastStateList[i] = valuesList[i];
+                    }
+                    undoStack.push(lastStateList);
                 }
                 cellsList.get(lastClicked).setLabel("");
-                for (int i = 1; i <= size; i++) {
-                    lastStateList[i] = valuesList[i];
-                }
                 valuesList[lastClicked] = 0;
                 if (showMistakes)
                     mistakesCheck();
