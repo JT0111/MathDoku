@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class RandomBoardBuilder {
-    int size;
-    int[] board;
-    int[] array = new int[1];
-    boolean[] isUsed;
-    boolean correctBoard = false;
+    private int size;
+    private int[] board;
+    private int[] array = new int[1];
+    private boolean[] isUsed;
+    private boolean correctBoard = false;
     private ArrayList<int[]> cagesList = new ArrayList<int[]>(100);
 
     /**
@@ -44,7 +44,7 @@ public class RandomBoardBuilder {
     /**
      * sets an empty spheres list to assign it's size
      */
-    public void setArray(){
+    private void setArray(){
         board=new int[size*size+1];
         for(int i=0; i<=size*size; i++){
             cagesList.add(array);
@@ -57,7 +57,7 @@ public class RandomBoardBuilder {
      * It's not completely random as it cannot validate rows/columns rules
      * That will be the solution of the board
      */
-    public void setRandomCombination(){
+    private void setRandomCombination(){
         //if a column already has the value written
         isUsed = new boolean[size+1];
         //if a row is already filled with the value
@@ -159,7 +159,7 @@ public class RandomBoardBuilder {
     /**
      * puts pre-defined values in cages and puts the information in cagesList
      */
-    public void setCages(){
+    private void setCages(){
         isUsed = new boolean[size*size+1];
         for(int i=1; i<=size*size; i++){
             if( cagesList.get(i) == array){
@@ -173,7 +173,7 @@ public class RandomBoardBuilder {
      * puts the result in fullCage
      * @param position
      */
-    public void makeCage(int position) {
+    private void makeCage(int position) {
         Random random = new Random();
         int[] newCage = new int[size * size];
         int i = 0, dir;

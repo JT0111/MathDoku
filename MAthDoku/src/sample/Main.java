@@ -58,8 +58,8 @@ public class Main extends Application {
         Button loadFromTextButton = new Button("Load game from text");
         Button generateNewGameButton = new Button("Generate random game");
         generateNewGameButton.setFont(new Font(25));
-        loadFromFileButton.setFont(new Font(15));
-        loadFromTextButton.setFont(new Font(15));
+        loadFromFileButton.setFont(new Font(25));
+        loadFromTextButton.setFont(new Font(25));
         helloLabel.setFont(new Font(25));
         orLabel.setFont(new Font(25));
         inputField = new TextArea();
@@ -73,13 +73,20 @@ public class Main extends Application {
         menuGrid.add(inputField, 0, 3);
         menuGrid.add(errorMessagesLine, 0, 4);
         menuGrid.add(loadFromTextButton, 0, 5);
-        menuGrid.add(loadFromFileButton, 1, 5);
+        menuGrid.add(loadFromFileButton, 0, 6);
 
-        menuGrid.setColumnSpan(helloLabel, 2);
-        menuGrid.setColumnSpan(generateNewGameButton, 2);
+        /*menuGrid.setColumnSpan(helloLabel, 2);
+        //menuGrid.setColumnSpan(generateNewGameButton, 2);
         menuGrid.setColumnSpan(inputField, 2);
         menuGrid.setColumnSpan(orLabel, 2);
+        menuGrid.setColumnSpan(loadFromTextButton, 2);
+        menuGrid.setColumnSpan(loadFromFileButton, 2);
+         */
+        menuGrid.setHalignment(loadFromTextButton, HPos.CENTER);
         menuGrid.setHalignment(orLabel, HPos.CENTER);
+        menuGrid.setHalignment(loadFromFileButton, HPos.CENTER);
+        menuGrid.setHalignment(generateNewGameButton, HPos.CENTER);
+        menuGrid.setHalignment(helloLabel, HPos.CENTER);
 
         loadFromFileButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)-> {
             try{
@@ -101,9 +108,9 @@ public class Main extends Application {
 
         generateNewGameButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e)->generateBoard());
 
-        menuGrid.setVgap(10);
-        menuGrid.setHgap(10);
-        startScene = new Scene(menuGrid, 350, 350);
+        menuGrid.setVgap(15);
+        menuGrid.setHgap(15);
+        startScene = new Scene(menuGrid, 450, 550);
         menuGrid.setAlignment(Pos.CENTER);
         primaryStage.setScene(startScene);
     }
