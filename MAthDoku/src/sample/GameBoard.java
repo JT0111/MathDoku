@@ -3,9 +3,12 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Transition;
 import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -1000,11 +1003,25 @@ public class GameBoard extends Pane {
                 solve();
             }
         });
-        clear.addEventHandler(KeyEvent.KEY_PRESSED, (e) -> {
-            if (e.getCode() == KeyCode.SPACE || e.getCode() == KeyCode.ENTER) {
-                clearBoard();
+        clear.setOnAction(new EventHandler<ActionEvent>()  {
+
+            @Override
+            public void handle(ActionEvent event) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                        "This action can be later undone");
+
+                alert.setTitle("Clearing confirmation");
+                alert.setHeaderText("Are you sure you want to clear the board?");
+
+                Optional<ButtonType> result = alert.showAndWait();
+
+
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    clearBoard();
+                }
             }
         });
+
         undo.addEventHandler(KeyEvent.KEY_PRESSED, (e) -> {
             if (e.getCode() == KeyCode.SPACE || e.getCode() == KeyCode.ENTER) {
                 undo();
