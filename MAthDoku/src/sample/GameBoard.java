@@ -1,7 +1,5 @@
 package sample;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Transition;
+import javafx.animation.*;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -46,6 +44,7 @@ public class GameBoard extends Pane {
     private boolean[] sphereError = new boolean[70];
     private boolean[] columnError = new boolean[70];
     private ArrayList<Cell> cellsList = new ArrayList<Cell>(100);
+
 
     private int size, sqrtSize; //size of the grid and number of columns/rows
     private int lastClicked = 1; //position of cell that was recently clicked
@@ -377,30 +376,19 @@ public class GameBoard extends Pane {
      * Something will happen if a user wins the game, you can do it later
      */
     public void gameSolved(){
-        setColorsList();
-        Random random = new Random();
-        winAnimation = new Transition(2) {
-
-            @Override
-            protected void interpolate(double v) {
-            }
-            public void play() {
-                int j=random.nextInt(10);
-                for (int i = 1; i <= size; i++) {
-                    cellsList.get(i).setLabelColor(colorsList[j]);
-                    if (j == 9)
-                        j = 0;
-                    cellsList.get(i).setBackgroundColor(colorsList[j + 1]);
-                    j++;
-                }
-            }
-        };
-        winAnimation.setCycleCount(Transition.INDEFINITE);
-        winAnimation.setAutoReverse(false);
-        winAnimation.setDelay(Duration.millis(100));
-        winAnimation.setOnFinished((e)->winAnimation.playFromStart());
-        for(int k=0; k<10; k++)
-            winAnimation.playFromStart();
+        ArrayList<FadeTransition> transitionList = new ArrayList<FadeTransition>(size+1);
+        for(int i=0; i<cellsList.size(); i++){
+            transitionList.add(new FadeTransition(Duration.millis(500), cellsList.get(i)));
+            transitionList.get(i).setFromValue(1);
+            transitionList.get(i).setToValue(0);
+            transitionList.get(i).setAutoReverse(true);
+            transitionList.get(i).setCycleCount(Transition.INDEFINITE);
+        }
+        ParallelTransition pt = new ParallelTransition(transitionList.get(0));
+        for(int i=1; i<cellsList.size(); i++){
+            pt.getChildren().add(transitionList.get(i));
+        }
+        pt.play();
 
     }
 
