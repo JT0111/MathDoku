@@ -64,13 +64,15 @@ public class GameBoard extends Pane {
      */
     public GameBoard(String filename) throws IOException{
         setArray(filename);
-        setGrid();
-        setButtonsGrid();
-        addHandler();
+        System.out.println(size);
+        if(correctInput) {
+            setGrid();
+            setButtonsGrid();
+            addHandler();
+        }
         if(cellsList.size()<4 || cellsList.size()>66 || !correctInput){
             correctInput = false;
         }
-
         else{
             board.getChildren().add(grid);
             grid.setAlignment(Pos.TOP_LEFT);
@@ -82,6 +84,7 @@ public class GameBoard extends Pane {
 
             this.getChildren().add(fullBoard);
             cellsList.get(1).activate();
+
         }
     }
 
@@ -133,14 +136,15 @@ public class GameBoard extends Pane {
                 break;
             }
         }
-        if(cellsList.size()<4 || cellsList.size()>66 || !correctInput){
-            correctInput = false;
-            return;
-        }
+
         setGrid();
         setButtonsGrid();
         addHandler();
-
+        if(cellsList.size()<4 || cellsList.size()>66 || !correctInput){
+            correctInput = false;
+            System.out.println(cellsList.size());
+            return;
+        }
         board.getChildren().add(grid);
         grid.setAlignment(Pos.TOP_LEFT);
         buttonsGrid.setAlignment(Pos.TOP_RIGHT);
@@ -790,13 +794,13 @@ public class GameBoard extends Pane {
 
             //defines sign as an easy to use later integer
             sign = newLine.charAt(i);
-            if(newLine.charAt(i) != '÷' && newLine.charAt(i) != '-' && newLine.charAt(i) != '+' && newLine.charAt(i) != 'x'){
+            if(sign != '÷' && sign != '-' && sign != '+' && sign != 'x' && sign != ' '){
                 correctInput=false;
                 return;
             }
 
             //getting a list of all cells in a sphere and putting it in a "current" array
-            for (i = i + 2; i < newLine.length(); i++) {
+            for (i = i + 1; i < newLine.length(); i++) {
                 int position = 0;
                 if (newLine.charAt(i) >= '0' && newLine.charAt(i) <= '9') {
                     position = newLine.charAt(i) - '0';
@@ -849,15 +853,16 @@ public class GameBoard extends Pane {
             i++;
         }
 
-        //defines sign as an easy to use later integer
-        sign = newLine.charAt(i);
-        if(newLine.charAt(i) != '÷' && newLine.charAt(i) != '-' && newLine.charAt(i) != '+' && newLine.charAt(i) != 'x'){
+        sign =  newLine.charAt(i);
+
+        if(sign != '÷' && sign != '-' && sign != '+' && sign != 'x' && sign != ' ' ){
             correctInput=false;
+            System.out.println(sign);
             return;
         }
 
         //getting a list of all cells in a sphere and putting it in a "current" array
-        for (i = i + 2; i < newLine.length(); i++) {
+        for (i = i + 1; i < newLine.length(); i++) {
             int position = 0;
             if (newLine.charAt(i) >= '0' && newLine.charAt(i) <= '9') {
                 position = newLine.charAt(i) - '0';
@@ -880,9 +885,11 @@ public class GameBoard extends Pane {
         for (int j = 0; j < posInCurrent; j++) {
             newCage[2 + j] = current[j];
         }
+        //if any of the cells is
         for (i = 0; i < posInCurrent; i++) {
             if (cagesList.get(current[i]) != array0) {
                 correctInput = false;
+                System.out.println(current[i]);
                 return;
             }
             cagesList.set(current[i], newCage);
