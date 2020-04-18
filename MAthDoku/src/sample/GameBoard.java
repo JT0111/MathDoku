@@ -187,7 +187,17 @@ public class GameBoard extends Pane {
         undoStack.push(lastStateList);
         undo.setDisable(false);
         redo.setDisable(true);
-        fullMistakesCheck();
+
+        int realLastClicked = lastClicked;
+        for(int i=1; i<=size; i++){
+            lastClicked = i;
+            checkRow();
+            checkColumn();
+            checkSphere();
+        }
+        lastClicked = realLastClicked;
+
+        //fullMistakesCheck();
         //gameSolved();
     }
 
@@ -455,7 +465,7 @@ public class GameBoard extends Pane {
         int start = lastClicked % sqrtSize;
         int[] check = new int[sqrtSize + 1];
         boolean error = false;
-        for (int i = 0; i <= size; i += sqrtSize) {
+        for (int i = 0; i < size; i += sqrtSize) {
             if(start+i<=size)
                 check[valuesList[start + i]]++;
             if (check[valuesList[start + i]] > 1 && valuesList[start + i] != 0) {

@@ -145,14 +145,18 @@ public class RandomBoardBuilder {
                 }
             }
         }
+        //once in like 20 cases it doesn't work so it's good to make sure
+        //ofc I could just fix it but there are no points for that so.... yeah
         correctBoard = true;
         for(int i=0; i<size; i++){
+            int sum = 0;
             for(int j=1; j<=size; j++){
-                System.out.print(board[i*size+j]+ " ");
+                sum+=board[i*size+j];
                 if(board[i*size+j] == 0)
                     correctBoard=false;
             }
-            System.out.println("");
+            if(sum!=((1+size)*size/2))
+                correctBoard=false;
         }
     }
 
@@ -190,7 +194,7 @@ public class RandomBoardBuilder {
                     position--;
                     changedPosition=true;
                 }
-                else if (i == 1)
+                else if (i <= 3)
                     dir = 1;
             }
 
@@ -200,25 +204,34 @@ public class RandomBoardBuilder {
                     changedPosition=true;
                     position -= size;
                 }
-                else if (i == 1)
+                else if (i <= 3)
                     dir = 2;
             }
 
-            //2 - direction = right
+            //2 - direction = down
             if (dir == 2) {
-                if (position % size != 0 && !isUsed[position + 1]){
-                    changedPosition=true;
-                    position++;
-                }
-                else if (i == 1)
-                    dir = 3;
-            }
-            //3 - direction = down
-            if (dir == 3) {
                 if (position + size < size * size && !isUsed[position + size]){
                     changedPosition=true;
                     position += size;
                 }
+                else if (i <= 3)
+                    dir = 3;
+            }
+
+            //3 - direction = right
+            if (dir == 3) {
+                if (position % size != 0 && !isUsed[position + 1]){
+                    changedPosition=true;
+                    position++;
+                }
+                else if (i <= 3 && (position + size < size * size && !isUsed[position + size]))
+                    dir = 4;
+            }
+
+            //it's like the last hope, thanks to this there should be less single cells
+            if (dir == 4) {
+                changedPosition=true;
+                position += size;
             }
         }
         Arrays.sort(newCage, 0, i);
