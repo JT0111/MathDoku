@@ -376,9 +376,19 @@ public class GameBoard extends Pane {
      * Something will happen if a user wins the game, you can do it later
      */
     public void gameSolved(){
+        setColorsList();
+        Random random = new Random();
+        int j=random.nextInt(10);
+        for (int i = 1; i <= size; i++) {
+            cellsList.get(i).setLabelColor(colorsList[j]);
+            if (j == 9)
+                j = 0;
+            cellsList.get(i).setBackgroundColor(colorsList[j + 1]);
+            j++;
+        }
         ArrayList<FadeTransition> transitionList = new ArrayList<FadeTransition>(size+1);
         for(int i=0; i<cellsList.size(); i++){
-            transitionList.add(new FadeTransition(Duration.millis(500), cellsList.get(i)));
+            transitionList.add(new FadeTransition(Duration.millis(random.nextInt(200)+400), cellsList.get(i)));
             transitionList.get(i).setFromValue(1);
             transitionList.get(i).setToValue(0);
             transitionList.get(i).setAutoReverse(true);
@@ -389,7 +399,6 @@ public class GameBoard extends Pane {
             pt.getChildren().add(transitionList.get(i));
         }
         pt.play();
-
     }
 
     public void setColorsList() {
