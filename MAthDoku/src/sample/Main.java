@@ -129,7 +129,8 @@ public class Main extends Application {
         }
         RandomBoardBuilder myBuilder = new RandomBoardBuilder(size);
         myBoard = new GameBoard(myBuilder);
-        gameScene = new Scene(myBoard, myBoard.getSqrtSize()*50+80, myBoard.getSqrtSize()*50+120);
+        myBoard.setCellsSize(500);
+        gameScene = new Scene(myBoard, 550, 650);
         addHandler();
         primaryStage.setScene(gameScene);
         primaryStage.widthProperty().addListener((obs, oldVal, newVal) -> {
@@ -162,7 +163,8 @@ public class Main extends Application {
             return;
         }
         myBoard.setCorrectValues(boardSolver.getSolution());
-        gameScene = new Scene(myBoard, myBoard.getSqrtSize()*50+100, myBoard.getSqrtSize()*50+100);
+        myBoard.setCellsSize(500);
+        gameScene = new Scene(myBoard, 550, 650);
         addHandler();
         primaryStage.setScene(gameScene);
         primaryStage.widthProperty().addListener((obs, oldVal, newVal) -> {
@@ -198,7 +200,8 @@ public class Main extends Application {
             return;
         }
         myBoard.setCorrectValues(boardSolver.getSolution());
-        gameScene = new Scene(myBoard, myBoard.getSqrtSize()*50+100, myBoard.getSqrtSize()*50+100);
+        myBoard.setCellsSize(500);
+        gameScene = new Scene(myBoard, 550, 650);
         addHandler();
         primaryStage.setScene(gameScene);
         primaryStage.widthProperty().addListener((obs, oldVal, newVal) -> {
