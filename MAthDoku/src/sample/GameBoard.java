@@ -138,13 +138,17 @@ public class GameBoard extends Pane {
                 break;
             }
         }
-
+        for(int i = 1; i<=size; i++){
+            if(cagesList.get(i).length<3){
+                correctInput=false;
+                return;
+            }
+        }
         setGrid();
         setButtonsGrid();
         addHandler();
         if(cellsList.size()<4 || cellsList.size()>66 || !correctInput){
             correctInput = false;
-            System.out.println(cellsList.size());
             return;
         }
         board.getChildren().add(grid);
@@ -846,6 +850,12 @@ public class GameBoard extends Pane {
             if (i * i == size) {
                 sqrtSize = i;
                 break;
+            }
+        }
+        for(int i = 1; i<=size; i++){
+            if(cagesList.get(i).length<3){
+                correctInput=false;
+                return;
             }
         }
     }

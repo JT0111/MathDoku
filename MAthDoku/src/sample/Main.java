@@ -189,6 +189,10 @@ public class Main extends Application {
         for (String line : inputField.getText().split("\\n")){
             myBoard.addLine(line);
         }
+        if(myBoard.getIfCorrect()==false){
+            errorMessagesLine.setText("Provided board is invalid");
+            return;
+        }
         myBoard.allLinesIn();
         if(myBoard.getIfCorrect()==false){
             errorMessagesLine.setText("Provided board is invalid");

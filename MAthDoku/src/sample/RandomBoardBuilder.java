@@ -155,9 +155,12 @@ public class RandomBoardBuilder {
                 if(board[i*size+j] == 0)
                     correctBoard=false;
             }
-            if(sum!=((1+size)*size/2))
+            if(sum!=((1+size)*size/2)){
+                System.out.println("x");
                 correctBoard=false;
+            }
         }
+
     }
 
     /**
@@ -259,14 +262,14 @@ public class RandomBoardBuilder {
 
         int sign = random.nextInt(8);
         //<0, 2> is for division (it's the least likely to be possible)
-        if(sign<=2){
-            if(multiplicationSum!=0 && (max*max)%multiplicationSum==0){
+        if(sign<=7){
+            if((max*max)%multiplicationSum==0){
                 fullCage[0]=(max*max)/multiplicationSum;
                 fullCage[1]='÷';
                 isSet=true;
             }
             else
-                sign=3;
+                random.nextInt(6);
         }
 
         //3, 4 and all that cannot be divided goes to -
@@ -276,11 +279,11 @@ public class RandomBoardBuilder {
                 fullCage[1]='-';
                 isSet=true;
             }
-            else sign=5;
+            else sign=random.nextInt(2);
         }
 
         //5, 6 and all that cannot be subtracted goes to x
-        if(!isSet && sign<7){
+        if(!isSet && sign==0){
             if(multiplicationSum<100){
                 fullCage[0]=multiplicationSum;
                 fullCage[1]='x';
