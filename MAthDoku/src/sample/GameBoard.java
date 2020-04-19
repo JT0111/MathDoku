@@ -31,12 +31,12 @@ public class GameBoard extends Pane {
     Stack<int[]>redoStack = new Stack<int[]>();
     Stack<int[]>undoStack = new Stack<int[]>();
     Color[] colorsList = new Color[10];
-    Animation winAnimation;
     private ArrayList<int[]> cagesList = new ArrayList<int[]>(100);
     GridPane buttonsGrid = new GridPane();
     HBox board = new HBox();
     VBox fullBoard = new VBox();
     int[] array0 = new int[1];
+    private int currentFont=2;
     private int[] valuesList = new int[70];
     private int[] lastStateList = new int[70];
     private int[] correctValuesList;
@@ -46,7 +46,7 @@ public class GameBoard extends Pane {
     private ArrayList<Cell> cellsList = new ArrayList<Cell>(100);
 
 
-    private int size, sqrtSize; //size of the grid and number of columns/rows
+    private int size, sqrtSize=1; //size of the grid and number of columns/rows
     private int lastClicked = 1; //position of cell that was recently clicked
     GridPane grid = new GridPane();
     GridPane buttonGrid = new GridPane();
@@ -132,11 +132,15 @@ public class GameBoard extends Pane {
      * it's technically a creator but not quite
      */
     public void allLinesIn(){
-        for (int i = 1; i < 10; i++) {
+        for (int i = 1; i < 9; i++) {
             if (i * i == size) {
                 sqrtSize = i;
                 break;
             }
+        }
+        if(sqrtSize==1){
+            correctInput=false;
+            return;
         }
         for(int i = 1; i<=size; i++){
             if(cagesList.get(i).length<3){
@@ -165,7 +169,7 @@ public class GameBoard extends Pane {
     /**
      * removes all the inserted values from the board
      */
-    public void clearBoard() {
+    private void clearBoard() {
         int[] lastStateList = new int[size+2];
         for (int i = 1; i <= size; i++) {
             lastStateList[i] = valuesList[i];
@@ -181,7 +185,7 @@ public class GameBoard extends Pane {
     /**
      * shows all the correct values on the board
      */
-    public void solve() {
+    private void solve() {
         int[] lastStateList = new int[size+2];
         for (int i = 1; i <= size; i++) {
             lastStateList[i] = valuesList[i];
@@ -295,7 +299,7 @@ public class GameBoard extends Pane {
     /**
      * un-dos users' action
      */
-    public void undo(){
+    private void undo(){
         int[]  lastStateList = new int[size+2];
         for (int i = 1; i <= size; i++) {
             lastStateList[i] = valuesList[i];
@@ -316,7 +320,7 @@ public class GameBoard extends Pane {
     /**
      * Re-dos user's undone action
      */
-    public void redo(){
+    private void redo(){
         int[]  lastStateList = new int[size+1];
         for (int i = 1; i <= size; i++) {
             lastStateList[i] = valuesList[i];
@@ -334,7 +338,7 @@ public class GameBoard extends Pane {
             fullMistakesCheck();
     }
 
-    public void fullMistakesCheck(){
+    private void fullMistakesCheck(){
         int realLastClicked = lastClicked;
         for (int i = 1; i <= size; i++) {
             lastClicked = i;
@@ -347,7 +351,7 @@ public class GameBoard extends Pane {
      * calls functions looking for mistakes
      * checks if the game is solved
      */
-    public void mistakesCheck(){
+    private void mistakesCheck(){
         if(showMistakes){
             checkRow();
             checkColumn();
@@ -359,7 +363,7 @@ public class GameBoard extends Pane {
     /**
      * checks if a user solved the game
      */
-    public void checkIfSolved(){
+    private void checkIfSolved(){
         for (int i = 1; i <= size; i++) {
             if (valuesList[i] == 0 || rowError[i] == true || columnError[i] == true || sphereError[i] == true)
                 return;
@@ -371,6 +375,7 @@ public class GameBoard extends Pane {
      * changing the font size of all cells
      */
     public void setFont(int fontSize){
+        currentFont=fontSize;
         for(int i=1; i<=size; i++){
             cellsList.get(i).setFont(fontSize);
         }
@@ -383,6 +388,7 @@ public class GameBoard extends Pane {
     public void setCellsSize(double newSize){
         for(int i=1; i<=size; i++){
             cellsList.get(i).setSize(newSize/sqrtSize);
+            cellsList.get(i).setFont(currentFont);
         }
     }
 

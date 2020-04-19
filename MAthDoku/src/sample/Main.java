@@ -22,12 +22,11 @@ import java.io.*;
 
 public class Main extends Application {
 
-    Scene startScene, gameScene;
-    GameBoard myBoard;
-    int[] correctValues;
-    Stage primaryStage;
-    TextArea inputField;
-    Label errorMessagesLine=new Label("");
+    private Scene startScene, gameScene;
+    private GameBoard myBoard;
+    private Stage primaryStage;
+    private TextArea inputField;
+    private Label errorMessagesLine=new Label("");
 
     /**
      * Sets the Stage and builds all the components
@@ -50,7 +49,7 @@ public class Main extends Application {
      * sets a Menu stage
      * allows the user to choose the source of the game
      */
-    public void setMenuScene() throws IOException{
+    private void setMenuScene() throws IOException{
         GridPane menuGrid = new GridPane();
         Label helloLabel = new Label("Hi! What do you want to do?");
         Label orLabel = new Label("OR...");
@@ -115,7 +114,7 @@ public class Main extends Application {
         primaryStage.setScene(startScene);
     }
 
-    public void generateBoard(){
+    private void generateBoard(){
         int size;
         if(inputField.getText().length()>0){
             size = inputField.getText().charAt(0)-'0';
@@ -150,7 +149,7 @@ public class Main extends Application {
         });
     }
 
-    public void fileNameSet() throws IOException{
+    private void fileNameSet() throws IOException{
         String filename = inputField.getText();
         myBoard = new GameBoard(filename);
         if(myBoard.getIfCorrect()==false){
@@ -184,7 +183,7 @@ public class Main extends Application {
         });
     }
 
-    public void boardSetAsText() throws IOException{
+    private void boardSetAsText() throws IOException{
         myBoard = new GameBoard();
         for (String line : inputField.getText().split("\\n")){
             myBoard.addLine(line);
@@ -228,7 +227,7 @@ public class Main extends Application {
     /**
      * handles user input
      */
-    public void addHandler(){
+    private void addHandler(){
         gameScene.addEventHandler(KeyEvent.KEY_PRESSED, (e) -> {
             if(e.getCode()== KeyCode.BACK_SPACE){
                 myBoard.myKeyEvent("c");

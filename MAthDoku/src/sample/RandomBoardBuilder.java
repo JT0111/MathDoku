@@ -10,6 +10,7 @@ public class RandomBoardBuilder {
     private boolean[] isUsed;
     private boolean correctBoard = false;
     private ArrayList<int[]> cagesList = new ArrayList<int[]>(100);
+    private Random random = new Random();
 
     /**
      * creator taking boardSize as a parameter
@@ -18,8 +19,10 @@ public class RandomBoardBuilder {
     public RandomBoardBuilder(int size){
         this.size=size;
         setArray();
-        while (correctBoard == false)
+        while (correctBoard == false) {
             setRandomCombination();
+            System.out.println("x");
+        }
         setCages();
     }
 
@@ -60,7 +63,6 @@ public class RandomBoardBuilder {
         isUsed = new boolean[size+1];
         //if a row is already filled with the value
         boolean[] isFilled = new boolean[size+1];
-        Random random = new Random();
         //how many empty cells can't be filled with new value in given row
         int[] affectionLevel = new int[size+1];
         int randomPlace, mostAffected=0, position, highestAffectionLevel;

@@ -94,18 +94,19 @@ public class Cell extends Region{
         insertedNumber.setAlignment(Pos.CENTER);
     }
 
+
     public void setSize(double newSize){
         region.setPrefSize(newSize, newSize);
         if(showTarget){
             if(fontSize==3){
-                targetLabel.setFont(new Font(0.20*newSize));
+                targetLabel.setFont(new Font(0.15*newSize));
             }
             else
                 targetLabel.setFont(new Font(fontSize*0.09*newSize));
             targetLabel.setPrefSize(newSize, newSize/2);
         }
         if(fontSize==3){
-            insertedNumber.setFont(new Font(0.55*newSize));
+            insertedNumber.setFont(new Font(0.5*newSize));
         }
         else
             insertedNumber.setFont(new Font(fontSize*0.25*newSize));
@@ -121,12 +122,14 @@ public class Cell extends Region{
             if(showTarget==true){
                 targetLabel.setFont(new Font(0.40*targetLabel.getPrefHeight()));
             }
-            insertedNumber.setFont(new Font(0.55*insertedNumber.getPrefHeight()));
+            insertedNumber.setFont(new Font(0.65*insertedNumber.getPrefHeight()));
         }
-        if(showTarget==true){
-            targetLabel.setFont(new Font(size*0.17*targetLabel.getPrefHeight()));
+        else{
+            if(showTarget==true){
+                targetLabel.setFont(new Font(size*0.17*targetLabel.getPrefHeight()));
+            }
+            insertedNumber.setFont(new Font(size*0.25*insertedNumber.getPrefHeight()));
         }
-        insertedNumber.setFont(new Font(size*0.25*insertedNumber.getPrefHeight()));
     }
     /**
      * sets the inserted number to a given value
