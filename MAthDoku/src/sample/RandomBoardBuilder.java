@@ -18,11 +18,9 @@ public class RandomBoardBuilder {
     public RandomBoardBuilder(int size){
         this.size=size;
         setArray();
-        Solver mySolver;
         while (correctBoard == false)
             setRandomCombination();
         setCages();
-        //mySolver = new Solver(spheresList, size*size, size); //not sure how to use it and make sure it has one solution
     }
 
     public  ArrayList<int[]> getCagesList(){
@@ -131,6 +129,7 @@ public class RandomBoardBuilder {
                     //if there is just one option (last run)
                 else randomPlace=1;
                 position=0;
+                boolean cellFilled = false;
                 //assigning the value to a random empty position in most affected row
                 for(int j=1; j<=size; j++){
                     if(board[size*mostAffected+j]==0 && !isUsed[j]){
@@ -139,14 +138,31 @@ public class RandomBoardBuilder {
                             board[size*mostAffected+j]=i;
                             isUsed[j]=true;
                             position=j;
+                            cellFilled = true;
                             break;
                         }
+                    }
+                }
+                if(!cellFilled){
+                    for(int j=1; j<=size; j++){
+                        if(board[size*mostAffected+j]==0 && !isUsed[j]){
+                            board[size*mostAffected+j]=i;
+                            isUsed[j]=true;
+                            position=j;
+                            cellFilled = true;
+                            break;
+                        }
+                    }
+                    if(!cellFilled){
+                        correctBoard=false;
+                        return;
                     }
                 }
             }
         }
         //once in like 20 cases it doesn't work so it's good to make sure
         //ofc I could just fix it but there are no points for that so.... yeah
+        //okay, I'm pretty sure it is fixed now but just in case
         correctBoard = true;
         for(int i=0; i<size; i++){
             int sum = 0;
