@@ -1,6 +1,9 @@
 # MathDoku
 JavaFX MathDoku game application
 
+Running the application:
+Double click the icon of MathDoku.jar, if you’re using Linux and this doesn’t work, try navigating to this file through terminal and type “chmod +x MathDoku.jar”, command “java -jar MathDoku.jar” will also start the application (on Linux of course).
+
 Starting a Game:
 To start a game one can click on the “Generate random game” button or load one from file/text (see “Loading files”)
 
